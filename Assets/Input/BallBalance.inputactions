@@ -1,0 +1,79 @@
+{
+    "version": 1,
+    "name": "BallBalance",
+    "maps": [
+        {
+            "name": "BallBalance",
+            "id": "89cef3c5-2c34-46c6-8347-174d04dda66a",
+            "actions": [
+                {
+                    "name": "ControlPlatform",
+                    "type": "Value",
+                    "id": "ee894572-d23d-4189-82a3-0854b589a295",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "2D Vector",
+                    "id": "3517fc6b-d84f-4bdb-b32b-f58b9906b198",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControlPlatform",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "592bb3c6-a3d6-4b0e-aa12-f3b3814211ec",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControlPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "2fea13e4-d07a-4e53-a265-e7c89f1eb67f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControlPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "ddb77dcf-8013-4834-9c03-ac098c55e817",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControlPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "2c28b714-ba7c-4ebf-af1c-37e5e1b73ada",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ControlPlatform",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
