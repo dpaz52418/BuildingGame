@@ -9,13 +9,18 @@ public class ShipShoot : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed = 1f;
     
+    [SerializeField] private Transform leftPosition;
+    [SerializeField] private Transform centerPosition;
+    [SerializeField] private Transform rightPosition;
+    
     private PlayerInput playerInput;
+    private int currentPositionIndex = 1; // 0-2 for positions
 
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         
-        // If fire point not assigned, use this sprite's position
+        // firepoint is this position
         if (firePoint == null)
         {
             firePoint = transform;
@@ -23,16 +28,82 @@ public class ShipShoot : MonoBehaviour
         
         if (playerInput == null)
         {
-            Debug.LogError("PlayerInput component not found on this GameObject!");
+            Debug.LogError("PlayerInput component not found");
+        }
+        
+        // start at center
+        if (centerPosition != null)
+        {
+            transform.position = centerPosition.position;
         }
     }
 
     public void OnBlastAliens(InputValue value)
     {
-        // Shoot when action is performed
         if (value.isPressed)
         {
             Shoot();
+        }
+    }
+
+    public void OnMoveLeft(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            MoveLeft();
+        }
+    }
+
+    public void OnMoveRight(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            MoveRight();
+        }
+    }
+
+    void MoveLeft()
+    {
+        if (currentPositionIndex > 0)
+        {
+            currentPositionIndex--;
+            UpdatePosition();
+        }
+    }
+
+    void MoveRight()
+    {
+        if (currentPositionIndex < 2)
+        {
+            currentPositionIndex++;
+            UpdatePosition();
+        }
+    }
+
+    void UpdatePosition()
+    {
+        Transform targetPosition = null;
+        
+        switch (currentPositionIndex)
+        {
+            case 0:
+                targetPosition = leftPosition;
+                break;
+            case 1:
+                targetPosition = centerPosition;
+                break;
+            case 2:
+                targetPosition = rightPosition;
+                break;
+        }
+        
+        if (targetPosition != null)
+        {
+            transform.position = targetPosition.position;
+        }
+        else
+        {
+            Debug.LogError("where are you going lol");
         }
     }
 
@@ -44,10 +115,10 @@ public class ShipShoot : MonoBehaviour
             return;
         }
 
-        // Instantiate bullet at fire point
+        // instantiate bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         
-        // Add velocity to bullet
+        // bullet velocity
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
         {
