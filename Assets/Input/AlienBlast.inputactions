@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "AlienBlast",
+    "maps": [
+        {
+            "name": "AlienBlast",
+            "id": "a4d53a7e-0677-487f-ae7b-210779295ec5",
+            "actions": [
+                {
+                    "name": "BlastAliens",
+                    "type": "Button",
+                    "id": "deeb8a23-3ec9-4081-a8d0-87ca2fb90f38",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "836e1687-6cc6-4eec-a162-33404695536f",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BlastAliens",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
