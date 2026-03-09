@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ShipShoot : MonoBehaviour
 {
@@ -12,12 +13,24 @@ public class ShipShoot : MonoBehaviour
     [SerializeField] private Transform leftPosition;
     [SerializeField] private Transform centerPosition;
     [SerializeField] private Transform rightPosition;
-    
+
+    [Header("Cooldown Meter")]
+    [SerializeField] private float maxMeter = 100f;
+    [SerializeField] private float refillRate = 25f; // meter units per second
+    [SerializeField] private float shotCost = 35f; // meter units consumed per shot
+    [SerializeField] private Image meterFillImage; // UI Image (filled) to display the meter
+
+    private float currentMeter;
     private PlayerInput playerInput;
     private int currentPositionIndex = 1; // 0-2 for positions
 
+    /// Returns 0-1 meter value. => is a "get" accessor, which computes the expression every time
+    /// meterpercent is used or read.
+    public float MeterPercent => currentMeter / maxMeter;
+
     void Start()
     {
+        currentMeter = maxMeter;
         playerInput = GetComponent<PlayerInput>();
         
         // firepoint is this position
@@ -30,11 +43,36 @@ public class ShipShoot : MonoBehaviour
         {
             Debug.LogError("PlayerInput component not found");
         }
+
+        // auto-find meter fill image if not manually assigned
+        if (meterFillImage == null)
+        {
+            Transform meterTransform = transform.Find("Canvas/MeterFill");
+            if (meterTransform != null)
+            {
+                meterFillImage = meterTransform.GetComponent<Image>();
+            }
+        }
         
         // start at center
         if (centerPosition != null)
         {
             transform.position = centerPosition.position;
+        }
+    }
+
+    void Update()
+    {
+        // constantly refill the meter (clamped to max)
+        if (currentMeter < maxMeter)
+        {
+            currentMeter = Mathf.Min(currentMeter + refillRate * Time.deltaTime, maxMeter);
+        }
+
+        // keep the UI bar in sync
+        if (meterFillImage != null)
+        {
+            meterFillImage.fillAmount = MeterPercent;
         }
     }
 
@@ -109,11 +147,18 @@ public class ShipShoot : MonoBehaviour
 
     void Shoot()
     {
+        if (currentMeter < shotCost)
+        {
+            return;
+        }
+
         if (bulletPrefab == null)
         {
             Debug.LogError("Bullet prefab not assigned!");
             return;
         }
+
+        currentMeter -= shotCost;
 
         // instantiate bullet
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
