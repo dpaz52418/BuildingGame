@@ -43,16 +43,6 @@ public class ShipShoot : MonoBehaviour
         {
             Debug.LogError("PlayerInput component not found");
         }
-
-        // auto-find meter fill image if not manually assigned
-        if (meterFillImage == null)
-        {
-            Transform meterTransform = transform.Find("Canvas/MeterFill");
-            if (meterTransform != null)
-            {
-                meterFillImage = meterTransform.GetComponent<Image>();
-            }
-        }
         
         // start at center
         if (centerPosition != null)
@@ -170,4 +160,6 @@ public class ShipShoot : MonoBehaviour
             bulletRb.velocity = Vector2.up * bulletSpeed;
         }
     }
+
+    
 }
