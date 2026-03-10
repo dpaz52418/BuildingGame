@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class AlienBlastEnemyBehavior : MonoBehaviour
+public class DinosaurHopCactusBehavior : MonoBehaviour
 {
-    [SerializeField] private float speed = 1f; // speed at which the enemy moves downwards
+    [SerializeField] private float speed = 1f; // speed at which the enemy moves left
     // Start is called before the first frame update
     void Start()
     {
@@ -16,16 +16,16 @@ public class AlienBlastEnemyBehavior : MonoBehaviour
     void Update()
     {
         // move downwards at a constant speed
-        transform.Translate(Vector3.down * speed * Time.deltaTime);
+        transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // if collides with bullet, destroy self and destroy bullet.
-        if (collision.CompareTag("Bullet"))
+        // if collides with player, destroy player and indicate a loss.
+        if (collision.CompareTag("Player"))
         {
-            Destroy(gameObject);
             Destroy(collision.gameObject);
+            Debug.Log("You lose!");
         }
     }
 }
