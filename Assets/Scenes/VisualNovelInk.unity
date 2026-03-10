@@ -1616,6 +1616,7 @@ GameObject:
   - component: {fileID: 1404615252}
   - component: {fileID: 1404615253}
   - component: {fileID: 1404615254}
+  - component: {fileID: 1404615255}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -1670,14 +1671,41 @@ MonoBehaviour:
   playButton: {fileID: 2102605355}
   dialogBox: {fileID: 475650569}
   typewriter: {fileID: 1404615253}
-  storyJSON: {fileID: 4900000, guid: 1ca3f8e7b3be9b341ac58168608ad0d4, type: 3}
+  storyJSON: {fileID: 4900000, guid: d4c4c4b65c4075449a4944452ae197a8, type: 3}
   choices:
   - {fileID: 1570496961}
   - {fileID: 523219968}
   - {fileID: 623372632}
   tagEvents:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1404615255}
+        m_TargetAssemblyTypeName: SpeakerPortraitHandler, Assembly-CSharp
+        m_MethodName: UpdatePortrait
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1404615255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404615250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1ca9abc33fe9e4a83c49c3b81b508e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portrait_yuriko: {fileID: 21300000, guid: aa2e4586e104f6b47924b354750c56ac, type: 3}
+  portrait_iron: {fileID: 21300000, guid: b391f756256c2094296af4ee6b6661f1, type: 3}
+  portraitImage: {fileID: 683890993}
 --- !u!1 &1570496959
 GameObject:
   m_ObjectHideFlags: 0
