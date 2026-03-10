@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int totalDays = 3;
 
-    private int currentDay = 1;
+    public int currentDay = 1;
     public int CurrentDay => currentDay;
     public int TotalDays => totalDays;
 

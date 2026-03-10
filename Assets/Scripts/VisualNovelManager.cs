@@ -6,12 +6,13 @@ using Ink.Runtime;
 
 public class VisualNovelManager : MonoBehaviour
 {
-    [Header("Day-Indexed Assets (index 0 = Day 1, etc.)")]
-    [SerializeField] private TextAsset[] inkStoryPerDay;       // Ink JSON per day
+    [Header("Assets")]
+    [SerializeField] private TextAsset inkStoryJSON;           // single Ink JSON for all days
+    [SerializeField] private string[] knotPerDay;              // knot name per day (index 0 = Day 1)
     [SerializeField] private Sprite[] backgroundPerDay;        // background image per day
-    [SerializeField] private Sprite[] characterPortraitPerDay; // default portrait per day
+   // [SerializeField] private Sprite[] characterPortraitPerDay; // default portrait per day
 
-    [Header("Scene References")]
+    [Header("Scene")]
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Image portraitImage;
     [SerializeField] private InkDialoguePlayer inkDialoguePlayer;
@@ -33,29 +34,29 @@ public class VisualNovelManager : MonoBehaviour
 
     public void LoadDay(int day)
     {
-        int index = day - 1; // arrays are 0-based, days are 1-based
+        int index = day - 1;
 
-        // load Ink story
-        if (index < inkStoryPerDay.Length && inkStoryPerDay[index] != null)
+        // load Ink story and jump to the correct knot
+        if (inkStoryJSON != null && index < knotPerDay.Length && !string.IsNullOrEmpty(knotPerDay[index]))
         {
-            inkDialoguePlayer.EnterStoryFromJSONText(inkStoryPerDay[index].text);
+            inkDialoguePlayer.EnterStoryFromJSONText(inkStoryJSON.text);
+            inkDialoguePlayer.currentStory.ChoosePathString(knotPerDay[index]);
             inkDialoguePlayer.ContinueStory();
         }
         else
         {
-            Debug.LogError("No Ink story assigned for Day " + day);
+            Debug.LogError("no knot assigned for Day " + day);
         }
 
-        // load background
         if (backgroundImage != null && index < backgroundPerDay.Length && backgroundPerDay[index] != null)
         {
             backgroundImage.sprite = backgroundPerDay[index];
         }
-
-        // load character portrait
+        /*
         if (portraitImage != null && index < characterPortraitPerDay.Length && characterPortraitPerDay[index] != null)
         {
             portraitImage.sprite = characterPortraitPerDay[index];
         }
+        */
     }
 }

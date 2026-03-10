@@ -10,6 +10,13 @@ public class MicrogameManager : MonoBehaviour
     [SerializeField] private GameObject slot3;
     [SerializeField] private GameObject slot4;
 
+    [Header("Main Canvas")]
+    [SerializeField] private Canvas mainCanvas;
+    [SerializeField] private GameObject display1;
+    [SerializeField] private GameObject display2;
+    [SerializeField] private GameObject display3;
+    [SerializeField] private GameObject display4;
+
     [Header("Microgame Prefabs")]
     [SerializeField] private GameObject microgame1Prefab;
     [SerializeField] private GameObject microgame2Prefab;
@@ -62,13 +69,13 @@ public class MicrogameManager : MonoBehaviour
         // Day 1: Slot1
         // Day 2: Slot1, Slot2
         // Day 3: Slot1, Slot2, Slot3
-        ActivateMicrogame(slot1, microgame1Prefab);
+        ActivateMicrogame(slot1, microgame1Prefab, display1);
 
         if (day >= 2)
-            ActivateMicrogame(slot2, microgame2Prefab);
+            ActivateMicrogame(slot2, microgame2Prefab, display2);
 
         if (day >= 3)
-            ActivateMicrogame(slot3, microgame3Prefab);
+            ActivateMicrogame(slot3, microgame3Prefab, display3);
     }
 
     void LoadSecondInterval()
@@ -81,23 +88,23 @@ public class MicrogameManager : MonoBehaviour
         switch (day)
         {
             case 1:
-                ActivateMicrogame(slot2, microgame2Prefab);
+                ActivateMicrogame(slot2, microgame2Prefab, display2);
                 break;
             case 2:
-                ActivateMicrogame(slot3, microgame3Prefab);
+                ActivateMicrogame(slot3, microgame3Prefab, display3);
                 break;
             case 3:
-                ActivateMicrogame(slot4, microgame4Prefab);
+                ActivateMicrogame(slot4, microgame4Prefab, display4);
                 break;
         }
     }
 
-    void ActivateMicrogame(GameObject slot, GameObject microgamePrefab)
+    void ActivateMicrogame(GameObject slot, GameObject microgamePrefab, GameObject display)
     {
-        // Disable the IdleCamera (first child of the slot)
-        if (slot.transform.childCount > 0)
+        // Disable the first child of the corresponding display
+        if (display != null && display.transform.childCount > 0)
         {
-            slot.transform.GetChild(0).gameObject.SetActive(false);
+            display.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         // Instantiate microgame as child of the slot
