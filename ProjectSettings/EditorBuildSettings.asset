@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/InkWorkshop.unity
+    path: Assets/Scenes/TitleScreen.unity
+    guid: 5ec53b350966c4d4eb55b30b2464f824
+  - enabled: 1
+    path: Assets/Scenes/VisualNovelInk.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Microgames.unity
+    guid: 8e80c630d4f869741bd8ff8e17740444
   m_configObjects: {}

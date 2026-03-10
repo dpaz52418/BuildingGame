@@ -776,7 +776,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 523219969}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1404615254}
+        m_TargetAssemblyTypeName: InkDialoguePlayer, Assembly-CSharp
+        m_MethodName: MakeChoice
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &523219969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,7 +1097,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 623372633}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1404615254}
+        m_TargetAssemblyTypeName: InkDialoguePlayer, Assembly-CSharp
+        m_MethodName: MakeChoice
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &623372633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1579,7 +1603,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1404615252}
-  - component: {fileID: 1404615251}
   - component: {fileID: 1404615253}
   - component: {fileID: 1404615254}
   m_Layer: 0
@@ -1589,27 +1612,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1404615251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404615250}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68938181935aeab469fa4428d7433385, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerName: {fileID: 217529679}
-  textBox: {fileID: 978986742}
-  sentences:
-  - Awoken Deity:Welcome to my domain.
-  - Awoken Deity:You are not welcome.
-  - Awoken Deity:Regardless, I shall welcome you with open arms, for there are bigger
-    fish to fry.
-  playButton: {fileID: 2102605355}
-  typewriter: {fileID: 1404615253}
 --- !u!4 &1404615252
 Transform:
   m_ObjectHideFlags: 0
@@ -1652,6 +1654,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22f4f87b8a43ad48b84f3ee753d3cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speakerName: {fileID: 217529679}
+  textBox: {fileID: 978986742}
+  playButton: {fileID: 2102605355}
+  dialogBox: {fileID: 475650569}
+  typewriter: {fileID: 1404615253}
+  storyJSON: {fileID: 4900000, guid: d4c4c4b65c4075449a4944452ae197a8, type: 3}
+  choices:
+  - {fileID: 1570496961}
+  - {fileID: 523219968}
+  - {fileID: 623372632}
+  tagEvents:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1570496959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,13 +1750,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404615250}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1404615254}
+        m_TargetAssemblyTypeName: InkDialoguePlayer, Assembly-CSharp
+        m_MethodName: MakeChoice
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2001,9 +2016,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404615251}
-        m_TargetAssemblyTypeName: SimpleDialoguePlayer, Assembly-CSharp
-        m_MethodName: PlayNextLine
+      - m_Target: {fileID: 1404615254}
+        m_TargetAssemblyTypeName: InkDialoguePlayer, Assembly-CSharp
+        m_MethodName: ContinueStory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

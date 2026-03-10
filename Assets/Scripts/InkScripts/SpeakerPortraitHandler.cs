@@ -6,13 +6,13 @@ public class SpeakerPortraitHandler : MonoBehaviour
 {
     public Sprite portrait_yuriko, portrait_iron;
     public Image portraitImage;
-    public InkDialoguePlayer InkDialogueManager;
+    //public InkDialoguePlayer InkDialogueManager;
 
     public void UpdatePortrait()
     {
         Tag portraitTag = null;
 
-        //portraitTag = InkDialogueManager.tags.Find(tag => tag.key == "portrait");
+        portraitTag = InkDialoguePlayer.tags.Find(tag => tag.key == "portrait");
 
         if (portraitTag != null)
         {

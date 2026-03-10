@@ -10,21 +10,18 @@ public class InkDialoguePlayer : MonoBehaviour
 {
     // show in inspector
     public TextMeshProUGUI speakerName, textBox;
-    [SerializeField] string[] sentences;
     public Button playButton;
+    public GameObject dialogBox;
     public Typewriter typewriter;
-
-    // private variables
-    int currLine = 0;
 
     [Header("StoryText")]
     [SerializeField] TextAsset storyJSON;
     public Story currentStory;
 
     [Header("DialogueOptions")]
-    public Button[] choices;
+    [SerializeField] public Button[] choices;
     TextMeshProUGUI[] choicesText;
-    public static List<Tag> tags;
+    [SerializeField] public static List<Tag> tags;
 
     public UnityEvent tagEvents;
 
@@ -69,8 +66,16 @@ public class InkDialoguePlayer : MonoBehaviour
                 }
             } else
             {
-                Debug.LogWarning("can't continue story.");
-            }
+                if (currentStory.currentChoices.Count > 0)
+                {
+                    Debug.LogWarning("Can't Continue Story!");
+                } else
+                {
+                    Debug.Log("reached end of story. closing out dialogue box");
+                    dialogBox.SetActive(false);
+                }
+
+             }
         }
     }
 
@@ -156,7 +161,7 @@ public class InkDialoguePlayer : MonoBehaviour
 
     void GetTags(List<string> currentTags)
     {
-        if (currentTags != null)
+        if (tags != null)
         {
             tags.Clear();
         } else

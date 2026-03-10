@@ -41,7 +41,7 @@ public class Typewriter : MonoBehaviour
         // convert string into character array
         char[] lineCharArray = line.ToCharArray();
 
-        for (int i=0; i< lineCharArray.Length; i++)
+        for (int i=1; i< lineCharArray.Length; i++)
         {
             textBox.text += lineCharArray[i];
 
@@ -66,6 +66,16 @@ public class Typewriter : MonoBehaviour
     public void DisplayFullText(string line)
     {
         StopTyping();
+        // Parse the line, remove speaker
+        string[] splitLine = line.Split(':');
+        if (splitLine.Length > 1)
+        {
+            line = splitLine[1].Trim();
+        }
+        else
+        {
+            Debug.LogError("Line parsing error: no speaker found in line.");
+        }
         textBox.text = line;
     }
 }
