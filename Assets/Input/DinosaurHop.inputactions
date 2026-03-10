@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "DinosaurHop",
+    "maps": [
+        {
+            "name": "DinosaurHop",
+            "id": "29fd23ca-2e7c-4f20-89c7-b9f1f5900ae4",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "1505566b-39d5-4a52-8023-cc8ca643cf6c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "eb314479-abc8-4ea0-9275-c0d1f924aede",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

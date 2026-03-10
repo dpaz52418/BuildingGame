@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bullet
   - AlienBlastEnemy
+  - Ground
   layers:
   - Default
   - TransparentFX
