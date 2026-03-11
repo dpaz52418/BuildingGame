@@ -29,7 +29,7 @@ public class SpeakerPortraitHandler : MonoBehaviour
             }
         } else
         {
-            Debug.LogError("no portrait.");
+            Debug.LogError("no portrait tag found.");
         }
     }
 }
