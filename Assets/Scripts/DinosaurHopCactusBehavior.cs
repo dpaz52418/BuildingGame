@@ -25,7 +25,8 @@ public class DinosaurHopCactusBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
-            Debug.Log("You lose!");
+            MicrogameManager.NotifyLoss(gameObject);
+            Debug.Log("Player hit by cactus, loss triggered.");
         }
     }
 }

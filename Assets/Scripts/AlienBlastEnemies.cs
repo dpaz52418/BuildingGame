@@ -46,6 +46,6 @@ public class AlienBlastEnemies : MonoBehaviour
             return;
         }
 
-        Instantiate(enemyPrefab, chosen.position, Quaternion.identity);
+        Instantiate(enemyPrefab, chosen.position, Quaternion.identity, gameObject.transform);
     }
 }

@@ -18,7 +18,7 @@ public class DinosaurHopCacti : MonoBehaviour
             spawnTimer = 0f;
             Vector3 pos = spawnPoint.position;
             Quaternion rot = Quaternion.identity;
-            Instantiate(cactusPrefab, pos, rot);
+            Instantiate(cactusPrefab, pos, rot, transform);
         }
     }
 }

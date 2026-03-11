@@ -27,5 +27,12 @@ public class AlienBlastEnemyBehavior : MonoBehaviour
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }
+        // if enemy reaches the lose zone, player loses a life
+        else if (collision.CompareTag("LoseZone"))
+        {
+            MicrogameManager.NotifyLoss(gameObject);
+            //Destroy(gameObject);
+            Debug.Log("Enemy reached lose zone, loss triggered.");
+        }
     }
 }

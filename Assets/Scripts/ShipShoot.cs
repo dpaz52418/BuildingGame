@@ -9,6 +9,7 @@ public class ShipShoot : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float bulletSpeed = 1f;
+    [SerializeField] private Collider2D loseZone; // assign a trigger collider that enemies can reach
     
     [SerializeField] private Transform leftPosition;
     [SerializeField] private Transform centerPosition;
