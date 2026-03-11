@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VisualNovelInk.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MicrogamesPROTO.unity
     guid: 8e80c630d4f869741bd8ff8e17740444
+  - enabled: 1
+    path: Assets/Scenes/Microgames GEN.unity
+    guid: b5a2f08228f53d544966cfb8a7e32b6a
   m_configObjects: {}

@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public int CurrentDay => currentDay;
     public int TotalDays => totalDays;
 
+    // false = "before gameplay" knot, true = "after gameplay" knot
+    public bool IsAfterGameplay { get; set; }
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -37,5 +40,6 @@ public class GameManager : MonoBehaviour
     public void ResetDays()
     {
         currentDay = 1;
+        IsAfterGameplay = false;
     }
 }

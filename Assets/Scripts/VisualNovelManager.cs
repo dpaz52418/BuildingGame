@@ -8,7 +8,8 @@ public class VisualNovelManager : MonoBehaviour
 {
     [Header("Assets")]
     [SerializeField] private TextAsset inkStoryJSON;           // single Ink JSON for all days
-    [SerializeField] private string[] knotPerDay;              // knot name per day (index 0 = Day 1)
+    [SerializeField] private string[] knotBeforePerDay;        // "before gameplay" knot per day (index 0 = Day 1)
+    [SerializeField] private string[] knotAfterPerDay;         // "after gameplay" knot per day (index 0 = Day 1)
     [SerializeField] private Sprite[] backgroundPerDay;        // background image per day
    // [SerializeField] private Sprite[] characterPortraitPerDay; // default portrait per day
 
@@ -35,17 +36,20 @@ public class VisualNovelManager : MonoBehaviour
     public void LoadDay(int day)
     {
         int index = day - 1;
+        bool after = GameManager.Instance != null && GameManager.Instance.IsAfterGameplay;
+
+        string[] knots = after ? knotAfterPerDay : knotBeforePerDay;
 
         // load Ink story and jump to the correct knot
-        if (inkStoryJSON != null && index < knotPerDay.Length && !string.IsNullOrEmpty(knotPerDay[index]))
+        if (inkStoryJSON != null && index < knots.Length && !string.IsNullOrEmpty(knots[index]))
         {
             inkDialoguePlayer.EnterStoryFromJSONText(inkStoryJSON.text);
-            inkDialoguePlayer.currentStory.ChoosePathString(knotPerDay[index]);
+            inkDialoguePlayer.currentStory.ChoosePathString(knots[index]);
             inkDialoguePlayer.ContinueStory();
         }
         else
         {
-            Debug.LogError("no knot assigned for Day " + day);
+            Debug.LogError("no knot assigned for Day " + day + (after ? " (after)" : " (before)"));
         }
 
         if (backgroundImage != null && index < backgroundPerDay.Length && backgroundPerDay[index] != null)
