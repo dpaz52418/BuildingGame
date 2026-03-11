@@ -19,10 +19,10 @@ public class DinosaurHopCactusBehavior : MonoBehaviour
         transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // if collides with player, destroy player and indicate a loss.
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
             Debug.Log("You lose!");

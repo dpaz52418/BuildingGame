@@ -911,6 +911,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1991211090}
+  - component: {fileID: 1991211091}
   m_Layer: 0
   m_Name: Cactus Spawner
   m_TagString: Untagged
@@ -927,12 +928,27 @@ Transform:
   m_GameObject: {fileID: 1991211089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.72, y: -1.52, z: 0}
+  m_LocalPosition: {x: 8.1, y: -1.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 384295098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1991211091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1991211089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05795ebf5151314892ecae6ece589aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cactusPrefab: {fileID: 1544970780545306883, guid: f1ccd463949b6ba41963a122b1819d44, type: 3}
+  spawnRate: 1
+  spawnPoint: {fileID: 1991211090}
 --- !u!1 &2034066794
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,9 +1323,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1095201624}
     m_Modifications:
+    - target: {fileID: 610848120434415953, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 2546408634955303378, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2621306357801544242, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2622554118478052765, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098573622224717832, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3848852541166768031, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
       propertyPath: m_LocalScale.x
@@ -1318,6 +1350,10 @@ PrefabInstance:
     - target: {fileID: 4968637545689625536, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
       propertyPath: m_Name
       value: Dinosaur Hop
+      objectReference: {fileID: 0}
+    - target: {fileID: 5950465666868762477, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
+      propertyPath: jumpHeight
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6329564767277089711, guid: 7692317c2d7f1c949b5abc77e6bec50e, type: 3}
       propertyPath: m_Camera
@@ -1389,6 +1425,10 @@ PrefabInstance:
     - target: {fileID: 1544970780545306883, guid: f1ccd463949b6ba41963a122b1819d44, type: 3}
       propertyPath: m_Name
       value: Dinosaur Enemy/Cactus
+      objectReference: {fileID: 0}
+    - target: {fileID: 1544970780545306883, guid: f1ccd463949b6ba41963a122b1819d44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3487603961852037761, guid: f1ccd463949b6ba41963a122b1819d44, type: 3}
       propertyPath: m_IsTrigger
