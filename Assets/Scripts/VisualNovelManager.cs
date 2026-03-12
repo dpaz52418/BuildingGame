@@ -2,21 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Ink.Runtime;
+using TMPro;
 
 public class VisualNovelManager : MonoBehaviour
 {
     [Header("Assets")]
-    [SerializeField] private TextAsset inkStoryJSON;           // single Ink JSON for all days
-    [SerializeField] private string[] knotBeforePerDay;        // "before gameplay" knot per day (index 0 = Day 1)
-    [SerializeField] private string[] knotAfterPerDay;         // "after gameplay" knot per day (index 0 = Day 1)
-    [SerializeField] private Sprite[] backgroundPerDay;        // background image per day
-   // [SerializeField] private Sprite[] characterPortraitPerDay; // default portrait per day
+    [SerializeField] private TextAsset inkStoryJSON;
+    [SerializeField] private string[] knotBeforePerDay;
+    [SerializeField] private string[] knotAfterPerDay;
+
+    [Header("Scene Names")]
+    [SerializeField] private string microgamesSceneName = "Microgames GEN";
+    [SerializeField] private string visualNovelSceneName = "VisualNovelInk";
 
     [Header("Scene")]
-    [SerializeField] private Image backgroundImage;
-    [SerializeField] private Image portraitImage;
     [SerializeField] private InkDialoguePlayer inkDialoguePlayer;
+    [SerializeField] private SpeakerPortraitHandler speakerPortraitHandler;
+    [SerializeField] private TextMeshProUGUI dayLabel;
+
+    // Maps GameManager day (1-indexed) to the displayed day number
+    private static readonly int[] displayDayMap = { 1, 7, 49 };
+
+    private string pendingTransition;
 
     void Start()
     {
@@ -31,6 +40,14 @@ public class VisualNovelManager : MonoBehaviour
         }
 
         LoadDay(day);
+    }
+
+    void UpdateDayLabel(int day)
+    {
+        if (dayLabel == null) return;
+        int index = day - 1;
+        int displayDay = (index >= 0 && index < displayDayMap.Length) ? displayDayMap[index] : day;
+        dayLabel.text = "Day: " + displayDay;
     }
 
     public void LoadDay(int day)
@@ -52,15 +69,45 @@ public class VisualNovelManager : MonoBehaviour
             Debug.LogError("no knot assigned for Day " + day + (after ? " (after)" : " (before)"));
         }
 
-        if (backgroundImage != null && index < backgroundPerDay.Length && backgroundPerDay[index] != null)
+        if (speakerPortraitHandler != null)
         {
-            backgroundImage.sprite = backgroundPerDay[index];
+            speakerPortraitHandler.UpdateBackground();
         }
-        /*
-        if (portraitImage != null && index < characterPortraitPerDay.Length && characterPortraitPerDay[index] != null)
+
+        UpdateDayLabel(day);
+    }
+
+    public void HandleTags()
+    {
+        if (InkDialoguePlayer.tags == null) return;
+
+        foreach (Tag tag in InkDialoguePlayer.tags)
         {
-            portraitImage.sprite = characterPortraitPerDay[index];
+            if (tag.key == "transition")
+            {
+                pendingTransition = tag.value;
+            }
         }
-        */
+    }
+
+
+    public void OnStoryEnd()
+    {
+        if (string.IsNullOrEmpty(pendingTransition)) return;
+
+        switch (pendingTransition)
+        {
+            case "gameplay":
+                SceneManager.LoadScene(microgamesSceneName);
+                break;
+            case "nextday":
+                GameManager.Instance.IsAfterGameplay = false;
+                GameManager.Instance.AdvanceDay();
+                SceneManager.LoadScene(visualNovelSceneName);
+                break;
+            default:
+                Debug.LogError("Unknown transition: " + pendingTransition);
+                break;
+        }
     }
 }

@@ -3,16 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class MicrogameManager : MonoBehaviour
 {
     public static event Action<GameObject> OnMinigameLost;
 
-    /// <summary>
-    /// Call from any script inside a minigame hierarchy to report a loss.
-    /// Pass any GameObject that lives under the minigame's slot.
-    /// </summary>
     public static void NotifyLoss(GameObject losingObject)
     {
         OnMinigameLost?.Invoke(losingObject);
@@ -47,6 +44,7 @@ public class MicrogameManager : MonoBehaviour
 
     [Header("Game Over")]
     [SerializeField] private GameObject gameOverPanel; // a UI panel with a retry button
+    [SerializeField] private string visualNovelSceneName = "VisualNovelInk";
 
     private int currentLives;
     private float elapsed;
@@ -93,7 +91,7 @@ public class MicrogameManager : MonoBehaviour
         // walk up the hierarchy to find which slot this object belongs to
         GameObject slot = FindSlotForObject(losingObject);
 
-        //currentLives--;
+        currentLives--;
         UpdateHeartsUI();
 
         if (currentLives <= 0)
@@ -142,6 +140,14 @@ public class MicrogameManager : MonoBehaviour
 
     void ShowGameOver()
     {
+        // On Day 3, losing still progresses the story
+        if (GameManager.Instance != null && GameManager.Instance.CurrentDay == 3)
+        {
+            GameManager.Instance.IsAfterGameplay = true;
+            SceneManager.LoadScene(visualNovelSceneName);
+            return;
+        }
+
         Debug.Log("Game Over! All lives lost.");
         if (gameOverPanel != null)
             gameOverPanel.SetActive(true);
@@ -149,14 +155,19 @@ public class MicrogameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    /// <summary>
-    /// Hook this up to the Retry button's OnClick event.
-    /// </summary>
+
     public void Retry()
     {
         Time.timeScale = 1f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+
+
+    public void Skip()
+    {
+        GameManager.Instance.IsAfterGameplay = true;
+        SceneManager.LoadScene(visualNovelSceneName);
     }
 
     void UpdateHeartsUI()
@@ -171,7 +182,17 @@ public class MicrogameManager : MonoBehaviour
 
     void Update()
     {
+        if (isGameOver) return;
+
         elapsed += Time.deltaTime;
+
+        // player survived — transition to the "after" visual novel knot
+        if (elapsed >= totalTime)
+        {
+            GameManager.Instance.IsAfterGameplay = true;
+            SceneManager.LoadScene(visualNovelSceneName);
+            return;
+        }
 
         float intervalDuration = totalTime / 2f;
 

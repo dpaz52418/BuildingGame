@@ -24,6 +24,7 @@ public class InkDialoguePlayer : MonoBehaviour
     [SerializeField] public static List<Tag> tags;
 
     public UnityEvent tagEvents;
+    public UnityEvent onStoryEnd;
 
     private void Start()
     {
@@ -73,6 +74,7 @@ public class InkDialoguePlayer : MonoBehaviour
                 {
                     Debug.Log("reached end of story. closing out dialogue box");
                     dialogBox.SetActive(false);
+                    onStoryEnd.Invoke();
                 }
 
              }
