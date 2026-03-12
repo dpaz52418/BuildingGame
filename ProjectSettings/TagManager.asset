@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - LoseZone
   - Ball
+  - Cactus
   layers:
   - Default
   - TransparentFX
