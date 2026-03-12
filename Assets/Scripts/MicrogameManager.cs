@@ -236,10 +236,13 @@ public class MicrogameManager : MonoBehaviour
         // register the slot mapping so we can reinstantiate later
         slotMap[slot] = new SlotInfo { prefab = microgamePrefab, display = display };
 
-        // Disable the first child of the corresponding display
-        if (display != null && display.transform.childCount > 0)
+        // Disable all children of the corresponding display
+        if (display != null)
         {
-            display.transform.GetChild(0).gameObject.SetActive(false);
+            for (int i = 0; i < display.transform.childCount; i++)
+            {
+                display.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
 
         // Instantiate microgame as child of the slot
